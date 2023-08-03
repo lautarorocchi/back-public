@@ -2,7 +2,7 @@ import express from 'express'
 import * as empresaApiControllers from "../controllers/empresa.api.controllers.js"
 import { isLogin } from '../../middleware/auth.middleware.js'
 import multer from 'multer'
-import { resizeImagen } from '../functions/resizeImagen.js'
+/*import { resizeImagen } from '../functions/resizeImagen.js'*/
 
 const storage = multer.diskStorage({
 
@@ -20,7 +20,7 @@ const router = express.Router();
 
 router.route('/api/empresas')
     .get(empresaApiControllers.buscarEmpresa)
-    .post([uploadedFile.any(), resizeImagen], empresaApiControllers.crearEmpresa)
+    .post(/*[uploadedFile.any(), resizeImagen],*/ empresaApiControllers.crearEmpresa)
 
 router.route('/api/empresas/tipos')
     .get(empresaApiControllers.buscarTiposDeEmpresa)
