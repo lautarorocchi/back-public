@@ -2,7 +2,7 @@ import express from 'express'
 import * as proyectoApiControllers from "../controllers/proyecto.api.controllers.js"
 import { isLogin } from '../../middleware/auth.middleware.js'
 import multer from 'multer'
-import { resizeImagenProductos } from '../functions/resizeImagen.js'
+/*import { resizeImagenProductos } from '../functions/resizeImagen.js'*/
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -25,11 +25,11 @@ router.route('/api/products/:id')
 
 router.route('/api/productos')
     .get(proyectoApiControllers.buscarProductos)
-    .post([uploadedFile.any(), resizeImagenProductos], proyectoApiControllers.crearUnProducto)
+    .post(/*[uploadedFile.any(), resizeImagenProductos],*/ proyectoApiControllers.crearUnProducto)
 
 router.route('/api/productos/:id')
     .get(proyectoApiControllers.traerUno)
-    .put([uploadedFile.any(), resizeImagenProductos], proyectoApiControllers.reemplazarPorId)
+    .put(/*[uploadedFile.any(), resizeImagenProductos]*/, proyectoApiControllers.reemplazarPorId)
     .delete(proyectoApiControllers.eliminarProducto)
 
 
