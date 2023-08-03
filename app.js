@@ -19,6 +19,6 @@ app.use(UserApiRoutes)
 app.use(EmpresaApiRoutes)
 app.use(ProyectoApiRoutes)
 
-app.listen(2022, function () {
-    console.log('El servidor esta ON! http://localhost:2022')
+app.listen(PORT, function () {
+    console.log('Tu app esta funcionando en el puerto 5000')
 })
