@@ -29,7 +29,7 @@ router.route('/api/productos')
 
 router.route('/api/productos/:id')
     .get(proyectoApiControllers.traerUno)
-    .put(/*[uploadedFile.any(), resizeImagenProductos]*/, proyectoApiControllers.reemplazarPorId)
+    .put(/*[uploadedFile.any(), resizeImagenProductos],*/ proyectoApiControllers.reemplazarPorId)
     .delete(proyectoApiControllers.eliminarProducto)
 
 
