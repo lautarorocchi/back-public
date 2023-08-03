@@ -1,0 +1,48 @@
+<%- include('../Layouts/Header', {title: proyecto.name}) %>
+
+    <div class="row">
+        <h2 class="col s12">
+           Proyecto: <%= proyecto.name %>
+        </h2>
+        <p class="col s12"><strong>Descripción:</strong>
+            <%= proyecto.description %>
+        </p>
+        <a href="/admin/projects" class="col s12">Ver Proyectos</a>
+
+
+        <div class="col s12 m6">
+            <div class="card panel hoverable">
+                <div class="card-image">
+                    <img src="<%- proyecto.img %>" alt="<%- proyecto.name %>">
+                    <span class="card-title"><strong> Nombre del Proyecto:</strong>
+                        <%- proyecto.name %>
+                    </span>
+                </div>
+                <div class="card-content">
+                    <ul>
+                        <li>
+                            <strong>Nombre del Proyecto:</strong>
+                            <%- proyecto.name %>
+                        </li>
+                        <li>
+                            <strong>ID:</strong>
+                            <%- proyecto._id %>
+                        </li>
+                        <li>
+                            <strong>Link del Proyecto:</strong>
+                            <a href=" <%- proyecto.link %>">
+                                Clickea Aqui
+                            </a>
+                        </li>
+                    </ul>
+                    <p>
+                        <strong>Descripción:</strong>
+                        <%- proyecto.description %>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <%- include('../Layouts/Footer') %>

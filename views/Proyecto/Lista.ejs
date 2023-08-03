@@ -1,0 +1,13 @@
+<%- include('../Layouts/Header', {title: "Mis Proyectos" }) %>
+
+    <section class="container">
+        <article class="row" id="proyectos">
+            <a class="col s12 m3 right waves-effect waves-light btn-large" href="/admin/projects/nuevo"> <i class="material-icons right">cloud</i>Nuevo Proyecto</a>
+            <h3 class="col s12 center-align">Administrar Proyectos</h3> 
+            <% for (let i=0; i < proyectos.length; i++) { %>
+                <%- include('ListaProyectos', {proyecto: proyectos[i]}) %>
+                    <% } %>
+        </article>
+    </section>
+
+    <%- include('../Layouts/Footer') %>

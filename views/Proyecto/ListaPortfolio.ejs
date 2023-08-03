@@ -1,0 +1,39 @@
+<% 
+    let edit 
+
+    if(proyecto?.public == true){
+        edit = true
+    }
+    if(proyecto?.public == false){
+        edit = false
+    }
+
+%> 
+
+<div class="col s12 m6" <%= (edit ? "" : "hidden" )%> >
+    <div class="card panel hoverable">
+        <div class="card-image">
+            <img src="<%- proyecto.img %>" alt="<%- proyecto.name %>">
+            <span class="card-title">Nombre del Proyecto: <%- proyecto.name %></span>
+        </div>
+        <div class="card-content">
+            <ul>
+                <li>
+                    Nombre del Proyecto: <%- proyecto.name %>
+                </li>
+                <li>
+                    Id: <%- proyecto._id %>
+                </li>
+                <li>
+                    Link del proyecto: 
+                    <a href=" <%- proyecto.link %>">
+                        Clickea Aqui
+                    </a>
+                </li>
+            </ul>
+            <p>
+                Descripción:<%- proyecto.description %>
+            </p>
+        </div>
+    </div>
+</div>
