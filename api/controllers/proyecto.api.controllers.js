@@ -28,6 +28,7 @@ function crearUnProducto(req, res) {
         description: req.body.description,
         cantidad: req.body.cantidad,
         img: req.body.img,
+        estado: true,
         empresa_id : ObjectID(req.body.empresa_id)
     }
     proyectoService.guardar(producto)
