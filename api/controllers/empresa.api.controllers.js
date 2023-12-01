@@ -32,7 +32,7 @@ function traerPorId(id){
     empresaService.traerEmpresaPorId(id)
     .then(function (empresa) {
         if (empresa) {
-            res.status(200).json(empresa)
+            res.status(200).json(empresa.email)
         }
         else {
             res.status(404).json({ message: 'Empresa no encontrada' })
