@@ -5,17 +5,6 @@ import UserApiRoutes from './api/routers/users.api.routes.js'
 import EmpresaApiRoutes from './api/routers/empresa.api.routes.js'
 import multer from 'multer'
 
-// Envío del correo
-sgMail
-  .send(msg)
-  .then(() => {
-    console.log('Correo enviado con éxito');
-  })
-  .catch((error) => {
-    console.error('Error al enviar el correo:', error);
-  });
-
-
 const app = express()
 
 const PORT = process.env.PORT || 5000;
