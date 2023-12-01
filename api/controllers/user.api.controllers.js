@@ -104,7 +104,7 @@ async function verify(req, res){
     try {
         const id = req.params.id;
         const usuario = {
-            id: ObjectId(req.body.id),
+            id: req.body.id,
             name: req.body.name,
             surname: req.body.surname,
             email: req.body.email
