@@ -103,16 +103,16 @@ function editarUsuario(req, res) {
 function verify(req, res){
     const id = req.params.id
     const usuario = {
-        name: 'Pepe',
-        surname: 'Argento',
-        email: 'pepeargento@gmail.com',
+        name: req.body.name,
+        surname: req.body.surname,
+        email: req.body.email,
     }
-    const correo = 'lautaro.rocchi@davinci.edu.ar'
-    const token = '6413e89042be2a41fe490ff4'
+    
+    const syncToken = jwt.sign({payload: { x: 1, y: '2'}}, 'REGISTER_SECRET');
     
     empresaService.traerUno(id)
     .then(empresa => {
-        mailService.enviarCorreoVerificacion(usuario, empresa.email, token)
+        mailService.enviarCorreoVerificacion(usuario, empresa.email, syncToken)
         .then(function () {
             res.status(200).json({ message: 'Mail enviado' })
         })
