@@ -5,7 +5,7 @@ function enviarCorreoVerificacion(correoDestino, token) {
   const link = `https://tudominio.com/verificar?token=${token}`;
 
   const msg = {
-    to: correoDestino,
+    to: 'lautarorocchi@gmail.com',
     from: 'stackux9@gmail.com',
     subject: 'Verificación de Registro',
     text: `Haz clic en el siguiente enlace para verificar tu registro: ${link}`,
