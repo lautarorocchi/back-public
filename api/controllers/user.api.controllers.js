@@ -122,7 +122,7 @@ async function verify(req, res) {
         res.status(200).json({ message: 'Mail enviado' });
     } catch (error) {
         // Manejar errores
-        if (error instanceof ValidationError) {
+        if (error) {
             res.status(400).json({ message: 'Error de validación', details: error.message });
         } else {
             res.status(500).json({ message: 'Error interno del servidor', details: error.message });
