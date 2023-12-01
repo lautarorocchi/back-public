@@ -5,7 +5,7 @@ function enviarCorreoVerificacion(usuario, correoDestino, token) {
   const link = `https://front-public.vercel.app/verify/${token}`;
 
   const msg = {
-    to: 'lautarorocchi@gmail.com',
+    to: correoDestino,
     from: 'stackux9@gmail.com',
     subject: 'Verificación de Registro',
     text: `Haz clic en el siguiente enlace para verificar tu registro: ${link}`,
