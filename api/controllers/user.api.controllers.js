@@ -114,16 +114,11 @@ async function verify(req, res){
     
         // Obtener la empresa por ID
         const empresa = await empresaService.traerEmpresaPorId(id);
-
-        const mail = "lautarorocchi@gmail.com";
     
-        // Enviar correo de verificación
         await mailService.enviarCorreoVerificacion(usuario, empresa.email, syncToken);
     
-        // Éxito
         res.status(200).json({ message: 'Mail enviado' });
     } catch (error) {
-        // Manejar errores
         if (error) {
             res.status(400).json({ message: 'Error de validación', details: error.message });
         } else {
