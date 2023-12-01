@@ -1,8 +1,8 @@
 import sgMail from '@sendgrid/mail'
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
-function enviarCorreoVerificacion(usuario, correoDestino, token) {
-  const link = `https://front-public.vercel.app/verify/${token}`;
+function enviarCorreoVerificacion(usuario, correoDestino) {
+  const link = `https://front-public.vercel.app/verify/${usuario.id}`;
 
   const msg = {
     to: correoDestino,

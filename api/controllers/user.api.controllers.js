@@ -104,16 +104,17 @@ async function verify(req, res){
     try {
         const id = req.params.id;
         const usuario = {
+            id: req.body._id,
             name: req.body.name,
             surname: req.body.surname,
             email: req.body.email
         };
 
-        const syncToken = jwt.sign({payload: { x: 1, y: '2'}}, 'REGISTER_SECRET');
+        /*const syncToken = jwt.sign({payload: { x: 1, y: '2'}}, 'REGISTER_SECRET');*/
     
         const empresa = await empresaService.traerEmpresaPorId(id);
     
-        await mailService.enviarCorreoVerificacion(usuario, empresa.email, syncToken);
+        await mailService.enviarCorreoVerificacion(usuario, empresa.email);
     
         res.status(200).json({ message: 'Mail enviado' });
     } catch (error) {
