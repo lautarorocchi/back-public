@@ -28,6 +28,18 @@ function traerUno(req, res) {
         })
 }
 
+function traerPorId(id){
+    empresaService.traerEmpresaPorId(id)
+    .then(function (empresa) {
+        if (empresa) {
+            res.status(200).json(empresa)
+        }
+        else {
+            res.status(404).json({ message: 'Empresa no encontrada' })
+        }
+    })
+}
+
 function crearEmpresa(req, res) {
     const empresa = {
         name: req.body.name,
@@ -105,6 +117,7 @@ export {
     buscarEmpresa,
     buscarTiposDeEmpresa,
     traerUno,
+    traerPorId,
     crearEmpresa,
     buscarRubro,
     buscarSubrubro,
