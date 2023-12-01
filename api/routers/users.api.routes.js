@@ -8,7 +8,7 @@ router.route('/api/usuarios')
     .post(userApiControllers.crearUsuario)
 
 router.route('/api/verify/:id')
-    .post(userApiControllers.verify)
+    .get(userApiControllers.verify)
     .put(userApiControllers.acceptVerify)
 
 router.route('/api/usuarios/login')
