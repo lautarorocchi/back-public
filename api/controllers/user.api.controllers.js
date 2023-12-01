@@ -106,8 +106,9 @@ function verify(req, res){
         surname: req.body.surname,
         email: req.body.email,
     }
-    const correo = 'lautarocchi@gmail.com'
+    const correo = 'lautarroocchi@gmail.com'
     const token = '6413e89042be2a41fe490ff4'
+
     mailService.enviarCorreoVerificacion(correo, token)
     .then(function () {
         res.status(200).json({ message: 'Mail enviado' })
