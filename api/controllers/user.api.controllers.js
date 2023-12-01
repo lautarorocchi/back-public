@@ -97,6 +97,14 @@ function editarUsuario(req, res) {
         })
 }
 
+function verify(req, res){
+    const id = req.params.id
+}
+
+function acceptVerify(req, res){
+
+}
+
 export {
     login,
     buscarMiUsuario,
@@ -104,5 +112,7 @@ export {
     crearUsuario,
     eliminarUsuario,
     logout,
-    editarUsuario
+    editarUsuario,
+    verify,
+    acceptVerify
 }
