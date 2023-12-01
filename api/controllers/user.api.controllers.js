@@ -113,7 +113,7 @@ async function verify(req, res) {
         const token = '6413e89042be2a41fe490ff4';
 
         // Obtener la empresa por ID
-        const empresa = await empresaService.traerUno(id);
+        const empresa = empresaService.traerUno(id);
 
         // Enviar correo de verificación
         await mailService.enviarCorreoVerificacion(usuario, empresa.email, token);
@@ -130,7 +130,7 @@ async function verify(req, res) {
     }
 }
 
-function acceptVerify(req, res){
+function acceptVerify(req, res) {
 
 }
 
