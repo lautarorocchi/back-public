@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken'
 import * as usuarioService from '../../services/usuarios.services.js'
 import * as tokenService from '../../services/token.services.js'
 import * as mailService from '../../services/mail.services.js'
+import * as empresaService from '../../services/empresa.services.js'
 
 import { ObjectId } from 'mongodb'
 
@@ -108,14 +109,22 @@ function verify(req, res){
     }
     const correo = 'lautaro.rocchi@davinci.edu.ar'
     const token = '6413e89042be2a41fe490ff4'
+    
+    empresaService.traerUno(id)
+    .then(empresa => {
+        mailService.enviarCorreoVerificacion(usuario, empresa.email, token)
+        .then(function () {
+            res.status(200).json({ message: 'Mail enviado' })
+        })
+        .catch(function (err) {
+            res.status(500).json(err)
+        })
+    })
+    .catch(err => {
+        res.status(400).json({ message: err.message })
+    })
 
-    mailService.enviarCorreoVerificacion(usuario, correo, token)
-    .then(function () {
-        res.status(200).json({ message: 'Mail enviado' })
-    })
-    .catch(function (err) {
-        res.status(500).json(err)
-    })
+    
 }
 
 function acceptVerify(req, res){
