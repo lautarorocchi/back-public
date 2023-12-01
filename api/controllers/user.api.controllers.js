@@ -113,7 +113,7 @@ async function verify(req, res){
         const syncToken = jwt.sign({payload: { x: 1, y: '2'}}, 'REGISTER_SECRET');
     
         // Obtener la empresa por ID
-        const empresa = empresaService.traerPorId(id);
+        const empresa = await empresaService.traerPorId(id);
     
         // Enviar correo de verificación
         await mailService.enviarCorreoVerificacion(usuario, empresa.email, syncToken);
