@@ -1,5 +1,4 @@
-import sgMail from '@sendgrid/mail'
-
+const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 function enviarCorreoVerificacion(correoDestino, token) {
@@ -16,6 +15,6 @@ function enviarCorreoVerificacion(correoDestino, token) {
   return sgMail.send(msg);
 }
 
-export{
-    enviarCorreoVerificacion,
-}
+module.exports = {
+  enviarCorreoVerificacion,
+};
