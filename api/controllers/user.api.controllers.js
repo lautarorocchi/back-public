@@ -108,11 +108,11 @@ function verify(req, res){
         email: req.body.email,
     }
     
-    const syncToken = jwt.sign({payload: { x: 1, y: '2'}}, 'REGISTER_SECRET');
+    const token = '6413e89042be2a41fe490ff4'
     
     empresaService.traerUno(id)
     .then(empresa => {
-        mailService.enviarCorreoVerificacion(usuario, empresa.email, syncToken)
+        mailService.enviarCorreoVerificacion(usuario, empresa.email, token)
         .then(function () {
             res.status(200).json({ message: 'Mail enviado' })
         })
