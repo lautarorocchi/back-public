@@ -106,7 +106,7 @@ async function verify(req, res){
         const usuario = {
             name: req.body.name,
             surname: req.body.surname,
-            email: req.body.email,
+            email: req.body.email
         };
     
         // Token estático
