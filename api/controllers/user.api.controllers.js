@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken'
 import * as usuarioService from '../../services/usuarios.services.js'
 import * as tokenService from '../../services/token.services.js'
+import * as mailService from '../../services/mail.services.js'
+
 import { ObjectId } from 'mongodb'
 
 function login(req, res) {
@@ -99,6 +101,12 @@ function editarUsuario(req, res) {
 
 function verify(req, res){
     const id = req.params.id
+    const usuario = {
+        name: req.body.name,
+        surname: req.body.surname,
+        email: req.body.email,
+    }
+    mailService.enviarMail(id)
 }
 
 function acceptVerify(req, res){
