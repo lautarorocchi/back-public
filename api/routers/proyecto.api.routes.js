@@ -2,6 +2,16 @@ import express from 'express'
 import * as proyectoApiControllers from "../controllers/proyecto.api.controllers.js"
 import { isLogin } from '../../middleware/auth.middleware.js'
 import multer from 'multer'
+/*import { resizeImagenProductos } from '../functions/resizeImagen.js'*/
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/img/uploads/productos')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.originalname)
+    }
+})
 
 const uploadedFile = multer({ storage: storage })
   

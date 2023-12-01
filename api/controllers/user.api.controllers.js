@@ -36,6 +36,7 @@ function crearUsuario(req, res) {
         surname: req.body.surname,
         empresa: ObjectId(req.body.empresa),
         email: req.body.email,
+        verified: false,
         password: req.body.password
     }
     usuarioService.guardarUsuario(usuario)
