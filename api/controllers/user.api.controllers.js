@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import * as usuarioService from '../../services/usuarios.services.js'
 import * as tokenService from '../../services/token.services.js'
 import * as mailService from '../../services/mail.services.js'
-import * as empresaService from '../../services/empresa.services.js'
+import * as empresaService from '../controllers/empresa.api.controllers.js'
 
 import { ObjectId } from 'mongodb'
 
