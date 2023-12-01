@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import * as usuarioService from '../../services/usuarios.services.js'
 import * as tokenService from '../../services/token.services.js'
 import * as mailService from '../../services/mail.services.js'
-import * as empresaService from '../controllers/empresa.api.controllers.js'
+import * as empresaService from '../../services/empresa.services.js'
 
 import { ObjectId } from 'mongodb'
 
@@ -113,12 +113,12 @@ async function verify(req, res){
         const syncToken = jwt.sign({payload: { x: 1, y: '2'}}, 'REGISTER_SECRET');
     
         // Obtener la empresa por ID
-        const empresa = await empresaService.traerPorId(id);
+        const empresa = await empresaService.traerEmpresaPorId(id);
 
         const mail = "lautarorocchi@gmail.com";
     
         // Enviar correo de verificación
-        await mailService.enviarCorreoVerificacion(usuario, mail, syncToken);
+        await mailService.enviarCorreoVerificacion(usuario, empresa.mail, syncToken);
     
         // Éxito
         res.status(200).json({ message: 'Mail enviado' });
