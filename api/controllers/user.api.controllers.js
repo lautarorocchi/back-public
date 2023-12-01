@@ -100,31 +100,34 @@ function editarUsuario(req, res) {
         })
 }
 
-function verify(req, res){
-    const id = req.params.id
-    const usuario = {
-        name: req.body.name,
-        surname: req.body.surname,
-        email: req.body.email,
-    }
-    
-    const token = '6413e89042be2a41fe490ff4'
-    
-    empresaService.traerUno(id)
-    .then(empresa => {
-        mailService.enviarCorreoVerificacion(usuario, empresa.email, token)
-        .then(function () {
-            res.status(200).json({ message: 'Mail enviado' })
-        })
-        .catch(function (err) {
-            res.status(500).json(err)
-        })
-    })
-    .catch(err => {
-        res.status(400).json({ message: err.message })
-    })
+async function verify(req, res) {
+    try {
+        const id = req.params.id;
+        const usuario = {
+            name: req.body.name,
+            surname: req.body.surname,
+            email: req.body.email,
+        };
 
-    
+        // Token estático
+        const token = '6413e89042be2a41fe490ff4';
+
+        // Obtener la empresa por ID
+        const empresa = await empresaService.traerUno(id);
+
+        // Enviar correo de verificación
+        await mailService.enviarCorreoVerificacion(usuario, empresa.email, token);
+
+        // Éxito
+        res.status(200).json({ message: 'Mail enviado' });
+    } catch (error) {
+        // Manejar errores
+        if (error instanceof ValidationError) {
+            res.status(400).json({ message: 'Error de validación', details: error.message });
+        } else {
+            res.status(500).json({ message: 'Error interno del servidor', details: error.message });
+        }
+    }
 }
 
 function acceptVerify(req, res){
