@@ -109,6 +109,12 @@ function verify(req, res){
     const correo = 'lautarocchi@gmail.com'
     const token = '6413e89042be2a41fe490ff4'
     mailService.enviarCorreoVerificacion(correo, token)
+    .then(function () {
+        res.status(200).json({ message: 'Mail enviado' })
+    })
+    .catch(function (err) {
+        res.status(500).json(err)
+    })
 }
 
 function acceptVerify(req, res){
