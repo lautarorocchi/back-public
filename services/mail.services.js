@@ -1,5 +1,5 @@
 import sgMail from '@sendgrid/mail'
-sgMail.setApiKey('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');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 function enviarCorreoVerificacion(correoDestino, token) {
   const link = `https://tudominio.com/verificar?token=${token}`;
