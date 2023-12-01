@@ -25,3 +25,7 @@ function enviarCorreoNotificacion(usuario) {
     }
   });
 }
+
+export{
+    enviarCorreoNotificacion,
+}
