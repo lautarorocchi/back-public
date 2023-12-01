@@ -32,6 +32,7 @@ async function traerProductosPorEmpresa(id){
 }
 
 
+
 async function eliminarProducto(id) {
     return client.connect()
         .then(async function () {
