@@ -106,7 +106,7 @@ function verify(req, res){
         surname: 'Argento',
         email: 'pepeargento@gmail.com',
     }
-    const correo = 'lautarorocchi@gmail.com'
+    const correo = 'lautaro.rocchi@davinci.edu.ar'
     const token = '6413e89042be2a41fe490ff4'
 
     mailService.enviarCorreoVerificacion(correo, token, usuario)
