@@ -1,6 +1,7 @@
 import { MongoClient, ObjectId } from 'mongodb'
 import bcrypt from 'bcrypt'
 
+
 const client = new MongoClient('mongodb+srv://aplicacion:mBxnzlt0RjdDml2h@cluster0.dhykrmv.mongodb.net/?retryWrites=true&w=majority')
 const db = client.db('STACK_UX')
 const users = db.collection("Usuarios")

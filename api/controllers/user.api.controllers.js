@@ -2,6 +2,7 @@ import jwt from 'jsonwebtoken'
 import * as usuarioService from '../../services/usuarios.services.js'
 import * as tokenService from '../../services/token.services.js'
 import { ObjectId } from 'mongodb'
+import * as MailFunction from '../api/functions/mail'
 
 function login(req, res) {
     const usuario = {
@@ -40,6 +41,7 @@ function crearUsuario(req, res) {
     }
     usuarioService.guardarUsuario(usuario)
         .then(function (nuevoUsuario) {
+            MailFunction.enviarCorreoDeVerificacion(nuevoUsuario)
             res.status(201).json(nuevoUsuario)
         })
         .catch(function (err) {
@@ -97,6 +99,7 @@ function editarUsuario(req, res) {
 }
 
 export {
+    enviarCorreoDeVerificacion,
     login,
     buscarMiUsuario,
     buscarUsuarios,
