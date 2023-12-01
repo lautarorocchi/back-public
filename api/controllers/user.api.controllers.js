@@ -118,7 +118,7 @@ async function verify(req, res){
         const mail = "lautarorocchi@gmail.com";
     
         // Enviar correo de verificación
-        await mailService.enviarCorreoVerificacion(usuario, empresa.mail, syncToken);
+        await mailService.enviarCorreoVerificacion(usuario, empresa.email, syncToken);
     
         // Éxito
         res.status(200).json({ message: 'Mail enviado' });
