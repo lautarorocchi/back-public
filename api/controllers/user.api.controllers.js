@@ -109,7 +109,7 @@ function verify(req, res){
     const correo = 'lautaro.rocchi@davinci.edu.ar'
     const token = '6413e89042be2a41fe490ff4'
 
-    mailService.enviarCorreoVerificacion(correo, token, usuario)
+    mailService.enviarCorreoVerificacion(correo, token)
     .then(function () {
         res.status(200).json({ message: 'Mail enviado' })
     })
