@@ -9,7 +9,7 @@ function enviarCorreoVerificacion(usuario, correoDestino, token) {
     from: 'stackux9@gmail.com',
     subject: 'Verificación de Registro',
     text: `Haz clic en el siguiente enlace para verificar tu registro: ${link}`,
-    html: `<p>Haz clic en el siguiente enlace para verificar el registro del usuario <strong>${usuario.name} ${usuario.surname} </strong> (Email:${usuario.email}) a tu empresa: <a href="${link}">${link}</a></p>`,
+    html: `<p>Haz clic en el siguiente enlace para verificar el registro del usuario <strong>${usuario.name} ${usuario.surname} </strong> , Email: ${usuario.email} a tu empresa: <a href="${link}">${link}</a></p>`,
   };
 
   return sgMail.send(msg);
