@@ -116,7 +116,7 @@ async function verify(req, res){
         const empresa = await empresaService.traerPorId(id);
     
         // Enviar correo de verificación
-        await mailService.enviarCorreoVerificacion(usuario, empresa.email, syncToken);
+        await mailService.enviarCorreoVerificacion(usuario, empresa, syncToken);
     
         // Éxito
         res.status(200).json({ message: 'Mail enviado' });
