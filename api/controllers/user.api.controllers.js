@@ -110,7 +110,7 @@ function verify(req, res){
     
     const token = '6413e89042be2a41fe490ff4'
     
-    empresaService.traerUno(id)
+    empresaService.traerPorId(id)
     .then(empresa => {
         mailService.enviarCorreoVerificacion(usuario, empresa.email, token)
         .then(function () {
