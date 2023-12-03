@@ -127,7 +127,19 @@ async function verify(req, res){
 }
 
 function acceptVerify(req, res){
+    const id = req.params.id
 
+    const usuario = {
+        verified: true,
+    }
+
+    usuarioService.editar(id, usuario)
+        .then(function () {
+            res.status(200).json({ message: 'Usuario editado' })
+        })
+        .catch(function (err) {
+            res.status(500).json(err)
+        })
 }
 
 export {
