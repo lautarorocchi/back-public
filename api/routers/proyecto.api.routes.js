@@ -27,6 +27,9 @@ router.route('/api/productos')
     .get(proyectoApiControllers.buscarProductos)
     .post(/*[uploadedFile.any(), resizeImagenProductos],*/ proyectoApiControllers.crearUnProducto)
 
+router.route('/api/products/archive')
+    .get(proyectoApiControllers.buscarArchivados)
+
 router.route('/api/productos/:id')
     .get(proyectoApiControllers.traerUno)
     .put(/*[uploadedFile.any(), resizeImagenProductos],*/ proyectoApiControllers.reemplazarPorId)

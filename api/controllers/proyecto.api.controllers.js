@@ -8,6 +8,13 @@ function buscarProductos(req,res){
     })
 }
 
+function buscarArchivados(req,res){
+    proyectoService.traerArchivados()
+    .then(function (productos) {
+        res.status(200).json(productos)
+    })
+}
+
 function traerUno(req, res){
     const id = req.params.id
     /*console.log(id)*/
@@ -101,6 +108,7 @@ function buscarProductosPorEmpresa(req, res){
 
 export {
     buscarProductos,
+    buscarArchivados,
     traerUno,
     crearUnProducto,
     eliminarProducto,
