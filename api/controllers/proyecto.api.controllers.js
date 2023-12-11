@@ -8,12 +8,19 @@ function buscarProductos(req,res){
     })
 }
 
-function buscarArchivados(req,res){
-    proyectoService.traerArchivados()
-    .then(function (productos) {
-        res.status(200).json(productos)
+function buscarProductosPorEmpresaArchivados(req, res){
+    const id = req.params.id
+    proyectoService.traerProductosPorEmpresaArchivados(id)
+        .then(function (producto) {
+            if (producto) {
+                res.status(200).json(producto)
+            }
+            else {
+                res.status(404).json({ message: 'Productos no encontrados' })
+            }
     })
 }
+
 
 function traerUno(req, res){
     const id = req.params.id
@@ -108,7 +115,7 @@ function buscarProductosPorEmpresa(req, res){
 
 export {
     buscarProductos,
-    buscarArchivados,
+    buscarProductosPorEmpresaArchivados,
     traerUno,
     crearUnProducto,
     eliminarProducto,

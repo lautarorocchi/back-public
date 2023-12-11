@@ -12,11 +12,11 @@ async function traerProductos(){
     })
 }
 
-async function traerArchivados(){
+async function traerProductosPorEmpresaArchivados(id){
     return client.connect()
     .then(async function () {
         const db = client.db('STACK_UX')
-        return db.collection("Productos").find({estado: false}).toArray()
+        return db.collection("Productos").find({empresa_id: new ObjectId(id), estado: false}).toArray()
     })
     .catch(function (err) {
         return []
@@ -102,7 +102,7 @@ async function traerProductosNoDisponibles() {
 
 export {
     traerProductos,
-    traerArchivados,
+    traerProductosPorEmpresaArchivados,
     traerProductoPorId,
     traerProductosPorEmpresa,
     eliminarProducto,
