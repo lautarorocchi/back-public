@@ -121,7 +121,7 @@ function activarProducto(req, res) {
 
     proyectoService.activar(id, producto)
         .then(function () {
-            res.status(200).json({ message: 'Producto reemplazado' })
+            res.status(200).json({ message: 'Producto activado' })
         })
         .catch(function (err) {
             res.status(500).json(err)
@@ -137,7 +137,7 @@ function desactivarProducto(req, res) {
 
     proyectoService.desactivar(id, producto)
         .then(function () {
-            res.status(200).json({ message: 'Producto reemplazado' })
+            res.status(200).json({ message: 'Producto desactivado' })
         })
         .catch(function (err) {
             res.status(500).json(err)
