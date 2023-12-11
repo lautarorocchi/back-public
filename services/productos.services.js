@@ -107,6 +107,13 @@ async function activar(id, producto) {
         })
 }
 
+async function desactivar(id, producto) {
+    return client.connect()
+        .then(async function () {
+            const db = client.db('STACK_UX')
+            return db.collection('Productos').updateOne({ _id: new ObjectId(id) }, { $set: producto })
+        })
+}
 
 export {
     traerProductos,
@@ -118,6 +125,7 @@ export {
     editar,
     traerProductosDisponibles,
     traerProductosNoDisponibles,
-    activar
+    activar,
+    desactivar
 }
 

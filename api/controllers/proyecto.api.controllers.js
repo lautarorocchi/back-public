@@ -135,7 +135,7 @@ function desactivarProducto(req, res) {
         estado: false
     }
 
-    proyectoService.activar(id, producto)
+    proyectoService.desactivar(id, producto)
         .then(function () {
             res.status(200).json({ message: 'Producto reemplazado' })
         })
