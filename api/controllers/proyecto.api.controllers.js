@@ -128,6 +128,22 @@ function activarProducto(req, res) {
         })
 }
 
+function desactivarProducto(req, res) {
+    const id = req.params.id
+
+    const producto = {
+        estado: false
+    }
+
+    proyectoService.activar(id, producto)
+        .then(function () {
+            res.status(200).json({ message: 'Producto reemplazado' })
+        })
+        .catch(function (err) {
+            res.status(500).json(err)
+        })
+}
+
 
 export {
     buscarProductos,
