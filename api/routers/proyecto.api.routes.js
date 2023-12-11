@@ -35,6 +35,11 @@ router.route('/api/productos/:id')
     .put(/*[uploadedFile.any(), resizeImagenProductos],*/ proyectoApiControllers.reemplazarPorId)
     .delete(proyectoApiControllers.eliminarProducto)
 
+router.route('/api/productos/activar/:id')
+    .put(proyectoApiControllers.activarProducto)
+
+router.route('/api/productos/desactivar/:id')
+    .put(proyectoApiControllers.desactivarProducto)
 
 /*router.route('/api/productos/stock/disponibles')
     .get(proyectoApiControllers.buscarDisponibles)

@@ -112,6 +112,22 @@ function buscarProductosPorEmpresa(req, res){
     })
 }
 
+function activarProducto(req, res) {
+    const id = req.params.id
+
+    const producto = {
+        estado: true
+    }
+
+    proyectoService.activar(id, producto)
+        .then(function () {
+            res.status(200).json({ message: 'Producto reemplazado' })
+        })
+        .catch(function (err) {
+            res.status(500).json(err)
+        })
+}
+
 
 export {
     buscarProductos,
@@ -122,5 +138,7 @@ export {
     reemplazarPorId,
     buscarDisponibles,
     buscarNoDisponibles,
-    buscarProductosPorEmpresa
+    buscarProductosPorEmpresa,
+    activarProducto,
+    desactivarProducto
 }
