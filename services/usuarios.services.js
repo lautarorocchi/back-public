@@ -100,7 +100,7 @@ async function updatePasswordByVerificationCode(verificationCode, newPassword){
         }
 
         const salt = await bcrypt.genSalt(10)
-        user.password = await bcrypt.hash(newPassword, salt)
+        const newHashedPassword = await bcrypt.hash(newPassword, salt)
     
         user.password = newHashedPassword;
     
