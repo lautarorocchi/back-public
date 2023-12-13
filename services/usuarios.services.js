@@ -1,6 +1,5 @@
 import { MongoClient, ObjectId } from 'mongodb'
 import bcrypt from 'bcrypt'
-import { verify } from 'jsonwebtoken'
 import * as cryptoServices from '../api/functions/crypto.js'
 import * as mailServices from '../services/mail.services.js'
 
