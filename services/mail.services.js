@@ -15,6 +15,17 @@ function enviarCorreoVerificacion(usuario, correoDestino) {
   return sgMail.send(msg);
 }
 
+function enviarRecuperarContra(email, code){
+  const mailOptions = {
+    from: 'stackux9@gmail.com',
+    to: email,
+    subject: 'Código de verificación para recuperar contraseña',
+    text: `Tu código de verificación es: ${verificationCode}`,
+  };
+  return sgMail.send(mailOptions);
+}
+
 export{
-    enviarCorreoVerificacion
+    enviarCorreoVerificacion,
+    enviarRecuperarContra
 }

@@ -1,5 +1,8 @@
 import { MongoClient, ObjectId } from 'mongodb'
 import bcrypt from 'bcrypt'
+import { verify } from 'jsonwebtoken'
+import * as cryptoServices from '../api/functions/crypto'
+import * as mailServices from '../services/mail.services'
 
 const client = new MongoClient('mongodb+srv://aplicacion:mBxnzlt0RjdDml2h@cluster0.dhykrmv.mongodb.net/?retryWrites=true&w=majority')
 const db = client.db('STACK_UX')
@@ -69,6 +72,26 @@ async function editar(id, usuario) {
         })
 }
 
+async function verifyEmail(email){
+
+    const user = await users.findOne({ email });
+    
+    if (!user) {
+      return res.status(404).json({ message: 'Usuario no encontrado' });
+    }
+    
+    // Generar un código de verificación único
+    const verificationCode = cryptoServices.generateUniqueCode();
+    
+    /*// Guardar el código de verificación en la base de datos
+    user.verificationCode = verificationCode;
+    await user.save();*/
+
+    await mailServices.enviarRecuperarContra(email, verificationCode)
+    
+    res.json({ message: 'Se ha enviado un correo electrónico con el código de verificación.' });
+}
+
 
 export {
     login,
@@ -76,5 +99,6 @@ export {
     guardarUsuario,
     eliminar,
     buscarPorId,
-    editar
+    editar,
+    verifyEmail
 }

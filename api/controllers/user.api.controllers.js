@@ -142,6 +142,18 @@ function acceptVerify(req, res){
         })
 }
 
+function recoverPassword(req, res){
+    const email = req.body.email;
+
+    usuarioService.verifyEmail(email)
+        .then(function () {
+            res.status(200).json({ message: '¡El mail de recuperación ha sido enviado con éxito!' })
+        })
+        .catch(function (err) {
+            res.status(500).json(err)
+    })
+}
+
 export {
     login,
     buscarMiUsuario,
@@ -151,5 +163,6 @@ export {
     logout,
     editarUsuario,
     verify,
-    acceptVerify
+    acceptVerify,
+    recoverPassword
 }

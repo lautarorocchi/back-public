@@ -11,6 +11,9 @@ router.route('/api/verify/:id')
     .post(userApiControllers.verify)
     .put(userApiControllers.acceptVerify)
 
+router.route('/api/usuario/forgot-password')
+    .post(userApiControllers.recoverPassword)
+
 router.route('/api/usuarios/login')
     .post(userApiControllers.login)
 
