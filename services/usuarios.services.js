@@ -96,46 +96,47 @@ async function verificarEmail(email) {
     }
 }
 
-async function cambiarContra(verificationCode, newPassword){ try {
-    const user = await users.findOne({ verificationCode });
+async function cambiarContra(verificationCode, newPassword) {
+    try {
+        const user = await users.findOne({ verificationCode });
 
-    if (!user) {
-        throw new Error('Código de verificación no válido');
-    }
-
-    // Verificar si recoveryCodeUtilizado es true
-    if (user.recoveryCodeUtilizado) {
-        throw new Error('El código de recuperación ya ha sido utilizado');
-    }
-
-    const isSameAsCurrentPassword = await bcrypt.compare(newPassword, user.password);
-
-    if (isSameAsCurrentPassword) {
-        throw new Error('La nueva contraseña no puede ser igual a la contraseña actual');
-    }
-
-    const salt = await bcrypt.genSalt(10);
-    const newHashedPassword = await bcrypt.hash(newPassword, salt);
-
-    await users.updateOne(
-        { verificationCode },
-        {
-            $set: {
-                password: newHashedPassword
-            },
-            $unset: {
-                verificationCode: "",
-                recoveryCodeUtilizado: ""
-            }
+        if (!user) {
+            throw new Error('Código de verificación no válido');
         }
-    );
 
-    return {
-        message: 'Contraseña actualizada exitosamente'
-    };
-} catch (error) {
-    throw error;
-}
+        // Verificar si recoveryCodeUtilizado es true
+        if (user.recoveryCodeUtilizado) {
+            throw new Error('El código de recuperación ya ha sido utilizado');
+        }
+
+        const isSameAsCurrentPassword = await bcrypt.compare(newPassword, user.password);
+
+        if (isSameAsCurrentPassword) {
+            throw new Error('La nueva contraseña no puede ser igual a la contraseña actual');
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const newHashedPassword = await bcrypt.hash(newPassword, salt);
+
+        await users.updateOne(
+            { verificationCode },
+            {
+                $set: {
+                    password: newHashedPassword
+                },
+                $unset: {
+                    verificationCode: "",
+                    recoveryCodeUtilizado: ""
+                }
+            }
+        );
+
+        return {
+            message: 'Contraseña actualizada exitosamente'
+        };
+    } catch (error) {
+        throw error;
+    }
 }
 
 async function validarCodigoRecuperacion(codigoRecuperacion) {
