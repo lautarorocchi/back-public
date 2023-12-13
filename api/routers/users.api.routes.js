@@ -13,6 +13,7 @@ router.route('/api/verify/:id')
 
 router.route('/api/usuarios/forgot-password')
     .post(userApiControllers.recoverPassword)
+    .put(userApiControllers.resetPassword)
 
 router.route('/api/usuarios/login')
     .post(userApiControllers.login)

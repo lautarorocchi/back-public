@@ -2,7 +2,6 @@ import express from 'express'
 import * as proyectoApiControllers from "../controllers/proyecto.api.controllers.js"
 import { isLogin } from '../../middleware/auth.middleware.js'
 import multer from 'multer'
-/*import { resizeImagenProductos } from '../functions/resizeImagen.js'*/
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -25,14 +24,14 @@ router.route('/api/products/:id')
 
 router.route('/api/productos')
     .get(proyectoApiControllers.buscarProductos)
-    .post(/*[uploadedFile.any(), resizeImagenProductos],*/ proyectoApiControllers.crearUnProducto)
+    .post(proyectoApiControllers.crearUnProducto)
 
 router.route('/api/productos/archivados/:id')
     .get(proyectoApiControllers.buscarProductosPorEmpresaArchivados)
 
 router.route('/api/productos/:id')
     .get(proyectoApiControllers.traerUno)
-    .put(/*[uploadedFile.any(), resizeImagenProductos],*/ proyectoApiControllers.reemplazarPorId)
+    .put(proyectoApiControllers.reemplazarPorId)
     .delete(proyectoApiControllers.eliminarProducto)
 
 router.route('/api/productos/activar/:id')
@@ -40,12 +39,5 @@ router.route('/api/productos/activar/:id')
 
 router.route('/api/productos/desactivar/:id')
     .put(proyectoApiControllers.desactivarProducto)
-
-/*router.route('/api/productos/stock/disponibles')
-    .get(proyectoApiControllers.buscarDisponibles)
-
-    
-router.route('/api/productos/stock/agotado')
-    .get(proyectoApiControllers.buscarNoDisponibles)*/
 
 export default router

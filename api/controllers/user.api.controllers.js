@@ -110,8 +110,6 @@ async function verify(req, res){
             email: req.body.email
         };
 
-        /*const syncToken = jwt.sign({payload: { x: 1, y: '2'}}, 'REGISTER_SECRET');*/
-    
         const empresa = await empresaService.traerEmpresaPorId(id);
     
         await mailService.enviarCorreoVerificacion(usuario, empresa.email);
@@ -154,6 +152,23 @@ function recoverPassword(req, res){
     })
 }
 
+function resetPassword(req, res){
+    const verificationCode = req.body.code;
+    const newPassword = req.body.password
+
+    try {
+        usuarioService.updatePasswordByVerificationCode(verificationCode, newPassword)
+          .then(() => {
+            res.status(200).json({ message: 'Contraseña actualizada exitosamente' });
+          })
+          .catch((error) => {
+            res.status(500).json({ message: 'Error al actualizar la contraseña', error });
+          });
+      } catch (error) {
+        res.status(500).json({ message: 'Error interno del servidor', error });
+      }
+}
+
 export {
     login,
     buscarMiUsuario,
@@ -164,5 +179,6 @@ export {
     editarUsuario,
     verify,
     acceptVerify,
-    recoverPassword
+    recoverPassword,
+    resetPassword
 }
