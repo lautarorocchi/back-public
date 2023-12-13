@@ -15,6 +15,9 @@ router.route('/api/usuarios/forgot-password')
     .post(userApiControllers.recoverPassword)
     .put(userApiControllers.resetPassword)
 
+router.route('/api/usuarios/validate-code')
+    .post(userApiControllers.validarCodigo)
+
 router.route('/api/usuarios/login')
     .post(userApiControllers.login)
 

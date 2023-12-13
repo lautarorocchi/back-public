@@ -71,30 +71,35 @@ async function editar(id, usuario) {
         })
 }
 
-async function verifyEmail(email){
+async function verificarEmail(email) {
     try {
         const user = await users.findOne({ email });
-    
+
         if (!user) {
-          return res.status(404).json({ message: 'Usuario no encontrado' });
+            return res.status(404).json({ message: 'Usuario no encontrado' });
         }
-    
+
         const verificationCode = cryptoServices.generateUniqueCode();
-        await users.updateOne({ email }, { $set: { verificationCode } });
+        await users.updateOne({ email }, {
+            $set: {
+                verificationCode,
+                recoveryCodeUtilizado: false
+            }
+        });
 
         await mailServices.enviarRecuperarContra(email, verificationCode);
 
         return email;
-      } catch (error) {
+    } catch (error) {
         console.error('Error en verifyEmail:', error);
         res.status(500).json({ message: 'Error interno del servidor' });
-      }
+    }
 }
 
-async function updatePasswordByVerificationCode(verificationCode, newPassword){
+async function cambiarContra(verificationCode, newPassword) {
     try {
         const user = await users.findOne({ verificationCode });
-        
+
         if (!user) {
             throw new Error('Código de verificación no válido');
         }
@@ -115,7 +120,8 @@ async function updatePasswordByVerificationCode(verificationCode, newPassword){
                     password: newHashedPassword
                 },
                 $unset: {
-                    verificationCode: ""
+                    verificationCode: "",
+                    recoveryCodeUtilizado: ""
                 }
             }
         );
@@ -128,6 +134,26 @@ async function updatePasswordByVerificationCode(verificationCode, newPassword){
     }
 }
 
+async function validarCodigoRecuperacion(codigoRecuperacion) {
+    try {
+        const resultado = await users.updateOne(
+            { verificationCode: codigoRecuperacion, recoveryCodeUtilizado: false },
+            { $set: { recoveryCodeUtilizado: true } }
+        );
+
+        if (resultado.modifiedCount > 0) {
+            return { success: true, message: 'Código de recuperación válido.' };
+        } else {
+            return { success: false, message: 'Código de recuperación inválido.' };
+        }
+    } catch (error) {
+        console.error('Error al validar el código de recuperación:', error);
+        return { success: false, message: 'Error interno.' };
+    } finally {
+        await client.close();
+    }
+}
+
 
 export {
     login,
@@ -136,6 +162,7 @@ export {
     eliminar,
     buscarPorId,
     editar,
-    verifyEmail,
-    updatePasswordByVerificationCode
+    verificarEmail,
+    cambiarContra,
+    validarCodigoRecuperacion
 }

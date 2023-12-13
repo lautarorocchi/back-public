@@ -143,9 +143,9 @@ function acceptVerify(req, res){
 function recoverPassword(req, res){
     const email = req.body.email;
 
-    usuarioService.verifyEmail(email)
+    usuarioService.verificarEmail(email)
         .then(function () {
-            res.status(200).json({ message: '¡El mail de recuperación ha sido enviado con éxito!' })
+            res.status(200).json({ message: '¡El código de recuperación ha sido enviado con éxito!' })
         })
         .catch(function (err) {
             res.status(500).json(err)
@@ -157,8 +157,18 @@ async function resetPassword(req, res) {
     const newPassword = req.body.password;
 
     try {
-        await usuarioService.updatePasswordByVerificationCode(verificationCode, newPassword);
+        await usuarioService.cambiarContra(verificationCode, newPassword);
         res.status(200).json({ message: 'Contraseña actualizada exitosamente' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error al actualizar la contraseña', error: error.message });
+    }
+}
+
+async function validarCodigo(req, res){
+    const verificationCode = req.body.code;
+    try {
+        await usuarioService.validarCodigoRecuperacion(verificationCode);
+        res.status(200).json({ message: 'El código de verificación fue validado exitosamente.' });
     } catch (error) {
         res.status(500).json({ message: 'Error al actualizar la contraseña', error: error.message });
     }
@@ -175,5 +185,6 @@ export {
     verify,
     acceptVerify,
     recoverPassword,
-    resetPassword
+    resetPassword,
+    validarCodigo
 }
