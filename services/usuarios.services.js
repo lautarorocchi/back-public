@@ -79,14 +79,9 @@ async function verifyEmail(email){
           return res.status(404).json({ message: 'Usuario no encontrado' });
         }
     
-        // Generar un código de verificación único
         const verificationCode = cryptoServices.generateUniqueCode();
-    
-        /*// Guardar el código de verificación en la base de datos
-        user.verificationCode = verificationCode;
-        await user.save();*/
-    
-        // Enviar correo electrónico con el código de verificación
+        await users.updateOne({ email }, { $set: { verificationCode } });
+
         await mailServices.enviarRecuperarContra(email, verificationCode);
 
         return email;
