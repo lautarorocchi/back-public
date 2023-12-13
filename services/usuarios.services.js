@@ -1,8 +1,8 @@
 import { MongoClient, ObjectId } from 'mongodb'
 import bcrypt from 'bcrypt'
 import { verify } from 'jsonwebtoken'
-import * as cryptoServices from '../api/functions/crypto'
-import * as mailServices from '../services/mail.services'
+import * as cryptoServices from '../api/functions/crypto.js'
+import * as mailServices from '../services/mail.services.js'
 
 const client = new MongoClient('mongodb+srv://aplicacion:mBxnzlt0RjdDml2h@cluster0.dhykrmv.mongodb.net/?retryWrites=true&w=majority')
 const db = client.db('STACK_UX')
