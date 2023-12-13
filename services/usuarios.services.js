@@ -100,8 +100,10 @@ async function updatePasswordByVerificationCode(verificationCode, newPassword){
             { verificationCode },
             {
                 $set: {
-                    password: newHashedPassword,
-                    verificationCode: undefined
+                    password: newHashedPassword
+                },
+                $unset:{
+                    verificationCode: ""
                 }
             }
         );
