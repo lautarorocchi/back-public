@@ -154,7 +154,7 @@ function recoverPassword(req, res){
 
 function resetPassword(req, res){
     const verificationCode = req.body.code;
-    const newPassword = req.body.password
+    const newPassword = req.body.password;
 
     try {
         usuarioService.updatePasswordByVerificationCode(verificationCode, newPassword)

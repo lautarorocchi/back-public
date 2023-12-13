@@ -20,7 +20,7 @@ function enviarRecuperarContra(email, code){
     from: 'stackux9@gmail.com',
     to: email,
     subject: 'Código de verificación para recuperar contraseña',
-    text: `Tu código de verificación es: ${code}`,
+    text: `Tu código de verificación es: <strong>${code} </strong>`,
   };
   return sgMail.send(mailOptions);
 }
