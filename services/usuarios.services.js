@@ -88,8 +88,6 @@ async function verifyEmail(email){
     
         // Enviar correo electrónico con el código de verificación
         await mailServices.enviarRecuperarContra(email, verificationCode);
-    
-        res.json({ message: 'Se ha enviado un correo electrónico con el código de verificación.' });
       } catch (error) {
         console.error('Error en verifyEmail:', error);
         res.status(500).json({ message: 'Error interno del servidor' });
