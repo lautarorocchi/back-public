@@ -96,7 +96,7 @@ async function verificarEmail(email) {
     }
 }
 
-try {
+async function cambiarContra(verificationCode, newPassword){ try {
     const user = await users.findOne({ verificationCode });
 
     if (!user) {
@@ -135,6 +135,7 @@ try {
     };
 } catch (error) {
     throw error;
+}
 }
 
 async function validarCodigoRecuperacion(codigoRecuperacion) {
