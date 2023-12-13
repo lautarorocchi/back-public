@@ -93,28 +93,29 @@ async function verifyEmail(email){
 
 async function updatePasswordByVerificationCode(verificationCode, newPassword){
     try {
-        const user = await users.findOne({ verificationCode });
-    
-        if (!user) {
-          throw new Error('Código de verificación no válido');
+        const salt = await bcrypt.genSalt(10);
+        const newHashedPassword = await bcrypt.hash(newPassword, salt);
+
+        const result = await users.updateOne(
+            { verificationCode },
+            {
+                $set: {
+                    password: newHashedPassword,
+                    verificationCode: undefined
+                }
+            }
+        );
+
+        if (result.matchedCount === 0) {
+            throw new Error('Código de verificación no válido');
         }
 
-        const salt = await bcrypt.genSalt(10)
-        const newHashedPassword = await bcrypt.hash(newPassword, salt)
-    
-        user.password = newHashedPassword;
-    
-        user.verificationCode = undefined;
-    
-        await user.save();
-
         return {
-          message: 'Contraseña actualizada exitosamente',
-          user,
+            message: 'Contraseña actualizada exitosamente'
         };
-      } catch (error) {
+    } catch (error) {
         throw error; 
-      }
+    }
 }
 
 
