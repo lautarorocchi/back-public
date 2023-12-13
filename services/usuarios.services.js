@@ -72,23 +72,28 @@ async function editar(id, usuario) {
 }
 
 async function verifyEmail(email){
-
-    const user = await users.findOne({ email });
+    try {
+        const user = await users.findOne({ email });
     
-    if (!user) {
-      return res.status(404).json({ message: 'Usuario no encontrado' });
-    }
+        if (!user) {
+          return res.status(404).json({ message: 'Usuario no encontrado' });
+        }
     
-    // Generar un código de verificación único
-    const verificationCode = cryptoServices.generateUniqueCode();
+        // Generar un código de verificación único
+        const verificationCode = cryptoServices.generateUniqueCode();
     
-    /*// Guardar el código de verificación en la base de datos
-    user.verificationCode = verificationCode;
-    await user.save();*/
-
-    await mailServices.enviarRecuperarContra(email, verificationCode)
+        /*// Guardar el código de verificación en la base de datos
+        user.verificationCode = verificationCode;
+        await user.save();*/
     
-    res.json({ message: 'Se ha enviado un correo electrónico con el código de verificación.' });
+        // Enviar correo electrónico con el código de verificación
+        await mailServices.enviarRecuperarContra(email, verificationCode);
+    
+        res.json({ message: 'Se ha enviado un correo electrónico con el código de verificación.' });
+      } catch (error) {
+        console.error('Error en verifyEmail:', error);
+        res.status(500).json({ message: 'Error interno del servidor' });
+      }
 }
 
 
