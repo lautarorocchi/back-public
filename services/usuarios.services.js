@@ -98,9 +98,9 @@ async function updatePasswordByVerificationCode(verificationCode, newPassword){
         if (!user) {
           throw new Error('Código de verificación no válido');
         }
-    
-        const saltRounds = 10;
-        const newHashedPassword = await bcrypt.hash(newPassword, saltRounds);
+
+        const salt = await bcrypt.genSalt(10)
+        user.password = await bcrypt.hash(newPassword, salt)
     
         user.password = newHashedPassword;
     
