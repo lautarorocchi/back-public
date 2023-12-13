@@ -154,8 +154,6 @@ async function validarCodigoRecuperacion(codigoRecuperacion) {
     } catch (error) {
         console.error('Error al validar el código de recuperación:', error);
         return { success: false, message: 'Error interno.' };
-    } finally {
-        await client.close();
     }
 }
 
