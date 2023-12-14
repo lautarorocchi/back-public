@@ -157,7 +157,12 @@ async function resetPassword(req, res) {
     const newPassword = req.body.password;
 
     try {
-        await usuarioService.cambiarContra(verificationCode, newPassword);
+        const result = await usuarioService.cambiarContra(verificationCode, newPassword);
+
+        if (result.error) {
+            return res.status(400).json({ message: 'Error al actualizar la contraseña', error: result.error });
+        }
+
         res.status(200).json({ message: 'Contraseña actualizada exitosamente' });
     } catch (error) {
         res.status(500).json({ message: 'Error al actualizar la contraseña', error: error.message });
