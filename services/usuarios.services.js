@@ -111,7 +111,9 @@ async function cambiarContra(verificationCode, newPassword) {
         const isSameAsCurrentPassword = await bcrypt.compare(newPassword, user.password);
 
         if (isSameAsCurrentPassword) {
-            throw new Error('La nueva contraseña no puede ser igual a la contraseña actual');
+            return {
+                error: 'La nueva contraseña no puede ser igual a la contraseña actual'
+            };
         }
 
         const salt = await bcrypt.genSalt(10);
