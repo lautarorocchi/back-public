@@ -140,6 +140,15 @@ async function cambiarContra(verificationCode, newPassword) {
 
 async function validarCodigoRecuperacion(codigoRecuperacion) {
     try {
+        const user = await users.findOne({
+            verificationCode: codigoRecuperacion,
+            recoveryCodeUtilizado: false
+        });
+
+        if (!user) {
+            return { success: false, message: 'Código de recuperación inválido.' };
+        }
+
         const resultado = await users.updateOne(
             { verificationCode: codigoRecuperacion, recoveryCodeUtilizado: false },
             { $set: { recoveryCodeUtilizado: true } }
@@ -148,7 +157,7 @@ async function validarCodigoRecuperacion(codigoRecuperacion) {
         if (resultado.modifiedCount > 0) {
             return { success: true, message: 'Código de recuperación válido.' };
         } else {
-            return { success: false, message: 'Código de recuperación inválido.' };
+            return { success: false, message: 'Error al actualizar el código de recuperación.' };
         }
     } catch (error) {
         console.error('Error al validar el código de recuperación:', error);
