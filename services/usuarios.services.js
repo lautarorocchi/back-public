@@ -146,7 +146,7 @@ async function validarCodigoRecuperacion(codigoRecuperacion) {
         });
 
         if (!user) {
-            return { success: false, message: 'Código de recuperación inválido.' };
+            throw new Error('Código de recuperación inválido.');
         }
 
         const resultado = await users.updateOne(
@@ -155,13 +155,12 @@ async function validarCodigoRecuperacion(codigoRecuperacion) {
         );
 
         if (resultado.modifiedCount > 0) {
-            return { success: true, message: 'Código de recuperación válido.' };
+            return resultado;
         } else {
-            return { success: false, message: 'Error al actualizar el código de recuperación.' };
+            throw new Error('Error al actualizar el código de recuperación.');
         }
     } catch (error) {
-        console.error('Error al validar el código de recuperación:', error);
-        return { success: false, message: 'Error interno.' };
+        throw new Error('Error al validar el código de recuperación:')
     }
 }
 
