@@ -175,7 +175,7 @@ async function validarCodigo(req, res){
         await usuarioService.validarCodigoRecuperacion(verificationCode);
         res.status(200).json({ message: 'El código de verificación fue validado exitosamente.' });
     } catch (error) {
-        res.status(500).json({ message: 'Error al actualizar la contraseña', error: error.message });
+        res.status(500).json({ message: 'Error al validar el código:', error: error.message });
     }
 }
 
