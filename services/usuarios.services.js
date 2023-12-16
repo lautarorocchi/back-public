@@ -154,7 +154,7 @@ async function validarCodigoRecuperacion(codigoRecuperacion) {
             { $set: { recoveryCodeUtilizado: true } }
         );
 
-        if (resultado.value) {
+        if (resultado.modifiedCount > 0) {
             return { success: true, message: 'Código de recuperación válido.' };
         } else {
             return { success: false, message: 'Error al actualizar el código de recuperación.' };
