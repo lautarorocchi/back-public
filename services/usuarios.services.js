@@ -104,8 +104,8 @@ async function cambiarContra(verificationCode, newPassword) {
             throw new Error('Código de verificación no válido');
         }
 
-        if (user.recoveryCodeUtilizado) {
-            console.log('El código de recuperación ya ha sido utilizado, pero continuamos con la actualización.');
+        if (!user.recoveryCodeUtilizado) {
+            throw new Error('El código de recuperación ya ha sido utilizado, pero continuamos con la actualización.');
         }
 
         const isSameAsCurrentPassword = await bcrypt.compare(newPassword, user.password);
