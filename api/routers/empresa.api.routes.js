@@ -2,6 +2,7 @@ import express from 'express'
 import * as empresaApiControllers from "../controllers/empresa.api.controllers.js"
 import { isLogin } from '../../middleware/auth.middleware.js'
 import multer from 'multer'
+import { isLogin } from '../../middleware/auth.middleware.js'
 /*import { resizeImagen } from '../functions/resizeImagen.js'*/
 
 const storage = multer.diskStorage({
@@ -39,5 +40,6 @@ router.route('/api/empresas/categoria/:id')
 
 router.route('/api/empresas/:id')
     .get(empresaApiControllers.traerUno)
+    .put([isLogin], empresaApiControllers.editarEmpresa)
 
 export default router

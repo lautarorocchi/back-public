@@ -112,6 +112,10 @@ function buscarTiposDeSubrubro(req, res){
         })
 }
 
+function editarEmpresa(req, res){
+    
+}
+
 
 export {
     buscarEmpresa,
@@ -122,5 +126,6 @@ export {
     buscarRubro,
     buscarSubrubro,
     buscarTiposDeRubro,
-    buscarTiposDeSubrubro
+    buscarTiposDeSubrubro,
+    editarEmpresa
 }
