@@ -39,6 +39,7 @@ function crearUsuario(req, res) {
         surname: req.body.surname,
         empresa: ObjectId(req.body.empresa),
         email: req.body.email,
+        role: "user",
         verified: false,
         password: req.body.password
     }
@@ -179,6 +180,26 @@ async function validarCodigo(req, res){
     }
 }
 
+function crearUsuarioAdmin(req, res) {
+    const usuario = {
+        name: req.body.name,
+        surname: req.body.surname,
+        empresa: ObjectId(req.body.empresa),
+        email: req.body.email,
+        role: "admin",
+        verified: true,
+        password: req.body.password
+    }
+    usuarioService.guardarUsuario(usuario)
+        .then(function (nuevoUsuario) {
+            res.status(201).json(nuevoUsuario)
+        })
+        .catch(function (err) {
+            res.status(500).json({ message: err.message })
+        })
+}
+
+
 export {
     login,
     buscarMiUsuario,
@@ -191,5 +212,6 @@ export {
     acceptVerify,
     recoverPassword,
     resetPassword,
-    validarCodigo
+    validarCodigo,
+    crearUsuarioAdmin
 }
