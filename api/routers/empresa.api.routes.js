@@ -1,6 +1,5 @@
 import express from 'express'
 import * as empresaApiControllers from "../controllers/empresa.api.controllers.js"
-import { isLogin } from '../../middleware/auth.middleware.js'
 import multer from 'multer'
 import { isLogin } from '../../middleware/auth.middleware.js'
 /*import { resizeImagen } from '../functions/resizeImagen.js'*/
