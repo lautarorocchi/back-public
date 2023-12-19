@@ -113,7 +113,25 @@ function buscarTiposDeSubrubro(req, res){
 }
 
 function editarEmpresa(req, res){
-    
+    const id = req.params.id
+
+    const empresa = {
+        name: req.body.name,
+        descripcion: req.body.descripcion,
+        email: req.body.email,
+        img: req.body.img,
+        localidad: req.body.localidad,
+        rubro: ObjectId(req.body.rubro),
+        subrubro: ObjectId(req.body.subrubro),
+    }
+
+    empresaService.editar(id, empresa)
+        .then(function () {
+            res.status(200).json({ message: 'La empresa ha sido editada con éxito.' })
+        })
+        .catch(function (err) {
+            res.status(500).json(err)
+    })
 }
 
 

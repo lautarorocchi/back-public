@@ -109,6 +109,14 @@ async function traerSubrubroPorId(id) {
     })
 }
 
+async function editar(id, empresita) {
+    return client.connect()
+    .then(async function () {
+        const db = client.db('STACK_UX')
+        return db.collection('Empresa').updateOne({ _id: new ObjectId(id) }, { $set: empresita })
+    })
+}
+
 export{
     traerEmpresa,
     traerTiposDeEmpresa,
@@ -117,5 +125,6 @@ export{
     buscarRubros,
     buscarSubrubros,
     traerRubroPorId,
-    traerSubrubroPorId
+    traerSubrubroPorId,
+    editar
 }
