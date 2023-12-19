@@ -180,7 +180,7 @@ async function validarCodigo(req, res){
     }
 }
 
-function crearUsuarioAdmin(req, res) {
+function crearAdmin(req, res) {
     const usuario = {
         name: req.body.name,
         surname: req.body.surname,
@@ -213,5 +213,5 @@ export {
     recoverPassword,
     resetPassword,
     validarCodigo,
-    crearUsuarioAdmin
+    crearAdmin
 }
